@@ -6,7 +6,7 @@
 <title>Yutile — your life, optimized.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@72,300;72,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -38,7 +38,7 @@
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     background: var(--cream);
     color: var(--text-dark);
     overflow-x: hidden;
@@ -57,13 +57,15 @@
   }
 
   .nav-logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 22px;
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
     color: var(--purple);
-    letter-spacing: -0.3px;
+    letter-spacing: -0.5px;
+    display: inline-flex; align-items: baseline;
   }
 
-  .nav-logo span { color: var(--yellow); }
+  .nav-logo .yu   { font-weight: 300; }
+  .nav-logo .tile { font-weight: 700; }
 
   .nav-links { display: flex; gap: 32px; align-items: center; }
 
@@ -120,7 +122,7 @@
   }
 
   .hero-title {
-    font-family: 'DM Serif Display', serif;
+    font-family: 'Fraunces', serif;
     font-size: clamp(48px, 8vw, 88px);
     line-height: 1.05;
     letter-spacing: -2px;
@@ -131,7 +133,6 @@
   }
 
   .hero-title .accent { color: var(--purple); font-style: italic; }
-  .hero-title .dot { color: var(--yellow); }
 
   .hero-sub {
     font-size: clamp(16px, 2.5vw, 20px);
@@ -212,7 +213,7 @@
 
   .phone-name {
     font-size: 18px; font-weight: 500; color: var(--text-dark);
-    font-family: 'DM Serif Display', serif;
+    font-family: 'Fraunces', serif;
   }
 
   .nova-card {
@@ -238,6 +239,132 @@
   .pillar-icon { font-size: 16px; }
   .pillar-name { font-size: 10px; font-weight: 500; }
   .pillar-val { font-size: 9px; opacity: 0.7; }
+
+  /* ── PHONE SPLASH ANIMATION ──────────────────────────────────────────────
+     Plays once on load. Mirrors the real app splash:
+       0.0–0.7s : "Your" fades in from left (Fraunces light)
+       0.7–1.4s : "Utility" fades in from right (Fraunces bold)
+       1.4–2.0s : both slide toward center, scale 0.85
+       2.0–2.8s : cross-fade into "Yutile" wordmark (Yu light + tile bold)
+       2.8–3.4s : "Yutile" scales 0.75 → 1.0 with spring feel
+       3.4–4.8s : tagline "your life, optimized" fades in below
+       4.8–5.6s : hold
+       5.6–6.2s : full splash fades out, dashboard underneath becomes visible
+  ───────────────────────────────────────────────────────────────────────── */
+
+  .phone-splash {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--cream);
+    border-radius: 32px;  /* match phone-screen rounded corners visually */
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    z-index: 5;
+    animation: splashFadeOut 0.6s ease 5.6s forwards;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .phone-splash-stage {
+    position: relative;
+    height: 80px;
+    display: flex; align-items: center; justify-content: center;
+    width: 100%;
+  }
+
+  .phone-splash-your, .phone-splash-utility {
+    position: absolute;
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    color: var(--purple);
+    letter-spacing: 1px;
+    opacity: 0;
+  }
+
+  .phone-splash-your {
+    font-weight: 300;
+    transform: translateX(-60px);
+    animation:
+      yourIn 0.7s ease 0.0s forwards,
+      yourMerge 0.6s ease 1.4s forwards,
+      mergeFadeOut 0.4s ease 2.0s forwards;
+  }
+
+  .phone-splash-utility {
+    font-weight: 700;
+    transform: translateX(60px);
+    animation:
+      utilityIn 0.7s ease 0.7s forwards,
+      utilityMerge 0.6s ease 1.4s forwards,
+      mergeFadeOut 0.4s ease 2.0s forwards;
+  }
+
+  .phone-splash-wordmark {
+    font-family: 'Fraunces', serif;
+    font-size: 38px;
+    color: var(--purple);
+    letter-spacing: -0.5px;
+    opacity: 0;
+    transform: scale(0.75);
+    display: inline-flex; align-items: baseline;
+    position: absolute;
+    animation: wordmarkIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 2.0s forwards;
+  }
+
+  .phone-splash-wordmark .yu   { font-weight: 300; }
+  .phone-splash-wordmark .tile { font-weight: 700; }
+
+  .phone-splash-tagline {
+    font-family: 'Fraunces', serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-style: italic;
+    letter-spacing: 0.4px;
+    margin-top: 12px;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: taglineIn 0.7s ease 3.4s forwards;
+  }
+
+  @keyframes yourIn {
+    to { opacity: 1; transform: translateX(-36px); }
+  }
+  @keyframes utilityIn {
+    to { opacity: 1; transform: translateX(36px); }
+  }
+  @keyframes yourMerge {
+    from { opacity: 1; transform: translateX(-36px) scale(1); }
+    to   { opacity: 1; transform: translateX(-8px) scale(0.85); }
+  }
+  @keyframes utilityMerge {
+    from { opacity: 1; transform: translateX(36px) scale(1); }
+    to   { opacity: 1; transform: translateX(8px) scale(0.85); }
+  }
+  @keyframes mergeFadeOut {
+    to { opacity: 0; }
+  }
+  @keyframes wordmarkIn {
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes taglineIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes splashFadeOut {
+    to { opacity: 0; visibility: hidden; }
+  }
+
+  /* Respect reduced-motion preference: skip splash entirely */
+  @media (prefers-reduced-motion: reduce) {
+    .phone-splash {
+      animation: none;
+      opacity: 0;
+      visibility: hidden;
+    }
+    .phone-splash-your, .phone-splash-utility,
+    .phone-splash-wordmark, .phone-splash-tagline {
+      animation: none;
+    }
+  }
 
   /* ── NOVA SECTION ── */
   .nova-section {
@@ -275,7 +402,7 @@
     width: 120px; height: 120px; border-radius: 50%;
     background: var(--purple);
     display: flex; align-items: center; justify-content: center;
-    font-family: 'DM Serif Display', serif;
+    font-family: 'Fraunces', serif;
     font-size: 32px; color: white;
     box-shadow: 0 8px 32px rgba(124,111,247,0.4);
     z-index: 1;
@@ -290,7 +417,7 @@
   }
 
   .section-title {
-    font-family: 'DM Serif Display', serif;
+    font-family: 'Fraunces', serif;
     font-size: clamp(32px, 5vw, 48px);
     line-height: 1.1; letter-spacing: -1px;
     color: var(--text-dark); margin-bottom: 20px;
@@ -371,7 +498,7 @@
   }
 
   .feature-num {
-    font-family: 'DM Serif Display', serif;
+    font-family: 'Fraunces', serif;
     font-size: 13px; color: var(--purple); margin-bottom: 12px;
     opacity: 0.6;
   }
@@ -414,7 +541,7 @@
     flex: 1; min-width: 220px;
     padding: 15px 20px; border-radius: 100px;
     border: none; outline: none;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 15px;
     background: white; color: var(--text-dark);
   }
@@ -426,7 +553,7 @@
     padding: 15px 28px; border-radius: 100px;
     font-size: 15px; font-weight: 500;
     border: none; cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     transition: transform 0.15s, opacity 0.2s;
     white-space: nowrap;
   }
@@ -440,7 +567,7 @@
   .waitlist-success {
     display: none; color: var(--yellow);
     font-size: 16px; margin-top: 16px;
-    font-family: 'DM Serif Display', serif;
+    font-family: 'Fraunces', serif;
   }
 
   /* ── FOOTER ── */
@@ -452,11 +579,15 @@
   }
 
   .footer-logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 18px; color: var(--purple-light);
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    color: var(--purple-light);
+    letter-spacing: -0.5px;
+    display: inline-flex; align-items: baseline;
   }
 
-  .footer-logo span { color: var(--yellow); }
+  .footer-logo .yu   { font-weight: 300; }
+  .footer-logo .tile { font-weight: 700; }
 
   .footer-copy {
     font-size: 13px; color: rgba(255,255,255,0.3);
@@ -493,7 +624,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Yutile<span>.</span></div>
+  <div class="nav-logo"><span class="yu">Yu</span><span class="tile">tile</span></div>
   <div class="nav-links">
     <a href="#features">Features</a>
     <a href="#pillars">Life pillars</a>
@@ -514,7 +645,7 @@
   </div>
 
   <h1 class="hero-title">
-    your life,<br><span class="accent">optimized</span><span class="dot">.</span>
+    your life,<br><span class="accent">optimized</span>
   </h1>
 
   <p class="hero-sub">
@@ -536,6 +667,19 @@
   <div class="hero-phone-wrap">
     <div class="phone-frame">
       <div class="phone-notch"></div>
+
+      <!-- Splash overlay: plays once on load, then fades out -->
+      <div class="phone-splash" aria-hidden="true">
+        <div class="phone-splash-stage">
+          <span class="phone-splash-your">Your</span>
+          <span class="phone-splash-utility">Utility</span>
+          <span class="phone-splash-wordmark">
+            <span class="yu">Yu</span><span class="tile">tile</span>
+          </span>
+        </div>
+        <div class="phone-splash-tagline">your life, optimized</div>
+      </div>
+
       <div class="phone-screen" style="background:#EEEDF4; padding:38px 12px 12px; overflow:hidden; display:flex; flex-direction:column; gap:8px;">
 
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2px;">
@@ -764,8 +908,8 @@
 
     <div style="background:white; border-radius:24px; padding:28px; border:1px solid rgba(124,111,247,0.08);" class="reveal">
       <div style="font-size:28px; margin-bottom:14px;">💜</div>
-      <div style="font-size:15px; font-weight:500; color:var(--text-dark); margin-bottom:8px;">Health Goals → Supplements</div>
-      <div style="font-size:13px; color:var(--text-muted); line-height:1.6;">Set a health goal and Nova suggests relevant vitamins, supplements, and wellness products — curated to your goal and ready to order with one tap.</div>
+      <div style="font-size:15px; font-weight:500; color:var(--text-dark); margin-bottom:8px;">Health Goals → Wellness Foods</div>
+      <div style="font-size:13px; color:var(--text-muted); line-height:1.6;">Tell Nova your wellness goals and she suggests fresh juices, calming teas, energising snacks, and other healthy foods — curated to your goal and ready to order in one tap.</div>
     </div>
 
     <div style="background:white; border-radius:24px; padding:28px; border:1px solid rgba(124,111,247,0.08);" class="reveal">
@@ -776,8 +920,8 @@
 
     <div style="background:white; border-radius:24px; padding:28px; border:1px solid rgba(124,111,247,0.08);" class="reveal">
       <div style="font-size:28px; margin-bottom:14px;">🔄</div>
-      <div style="font-size:15px; font-weight:500; color:var(--text-dark); margin-bottom:8px;">Habits → Auto-reorder</div>
-      <div style="font-size:13px; color:var(--text-muted); line-height:1.6;">Have a daily habit like taking vitamins or drinking green tea? Nova schedules recurring orders so you never run out — your habits, fully automated.</div>
+      <div style="font-size:15px; font-weight:500; color:var(--text-dark); margin-bottom:8px;">Habits → Smart Reorders</div>
+      <div style="font-size:13px; color:var(--text-muted); line-height:1.6;">Have a daily habit like sipping green tea or eating yogurt? Nova reminds you before you run out and gives you a one-tap reorder link — your habits, never interrupted.</div>
     </div>
 
     <div style="background:linear-gradient(135deg, #7C6FF7, #9B4AE8); border-radius:24px; padding:28px;" class="reveal">
@@ -794,7 +938,7 @@
   <div class="waitlist-blob wb1"></div>
   <div class="waitlist-blob wb2"></div>
   <div class="section-label">Early access</div>
-  <h2 class="section-title" style="color:white;margin-bottom:16px">Be first to try<br><em style="color:rgba(255,255,255,0.7)">Yutile</em></h2>
+  <h2 class="section-title" style="color:white;margin-bottom:16px">Be first to try<br><span style="font-family:'Fraunces',serif;letter-spacing:-1px;font-style:normal;"><span style="font-weight:300;color:rgba(255,255,255,0.85)">Yu</span><span style="font-weight:700;color:white">tile</span></span></h2>
   <p class="section-body">Join the waitlist and get early access when we launch. No spam, just your invite.</p>
 
   <form class="waitlist-form" onsubmit="handleWaitlist(event)">
@@ -808,7 +952,7 @@
 <!-- FOOTER -->
 <footer>
   <div style="display:flex; flex-direction:column; align-items:center; gap:16px; width:100%;">
-    <div class="footer-logo">Yutile<span>.</span></div>
+    <div class="footer-logo"><span class="yu">Yu</span><span class="tile">tile</span></div>
     <div style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center;">
       <a href="/privacy.html" style="font-size:13px; color:rgba(255,255,255,0.4); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Privacy Policy</a>
       <a href="/terms.html" style="font-size:13px; color:rgba(255,255,255,0.4); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Terms of Service</a>
