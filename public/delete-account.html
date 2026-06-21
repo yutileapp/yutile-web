@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delete Account — Yutile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#F0EFFA;color:#2D2A45;line-height:1.7}
+nav{background:rgba(240,239,250,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(124,111,247,0.1);padding:16px 48px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:20px;font-weight:700;color:#2D2A45;text-decoration:none}.logo span{color:#7C6FF7}
+.nav-back{font-size:14px;color:#7C6FF7;text-decoration:none;font-weight:500}
+.container{max-width:700px;margin:0 auto;padding:60px 24px 100px}
+.hero{text-align:center;margin-bottom:60px}
+.badge{display:inline-block;background:rgba(239,68,68,0.1);color:#DC2626;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px}
+h1{font-size:36px;font-weight:700;color:#1A1730;margin-bottom:12px}
+.subtitle{font-size:16px;color:#8B87A8;max-width:480px;margin:0 auto}
+.card{background:#fff;border-radius:20px;padding:32px;margin-bottom:16px;border:0.5px solid rgba(124,111,247,0.1)}
+.card-warn{border-color:rgba(239,68,68,0.2);background:#FFFBFB}
+h2{font-size:18px;font-weight:700;color:#1A1730;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+h2 .icon{font-size:20px}
+p{font-size:15px;color:#4A4670;margin-bottom:12px}
+p:last-child{margin-bottom:0}
+ul{font-size:15px;color:#4A4670;padding-left:20px;margin-bottom:12px}
+ul li{margin-bottom:8px}
+.step{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px}
+.step:last-child{margin-bottom:0}
+.step-num{width:32px;height:32px;border-radius:50%;background:#7C6FF7;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-content h3{font-size:15px;font-weight:600;color:#1A1730;margin-bottom:4px}
+.step-content p{font-size:14px;color:#6B6890;margin:0}
+.email-btn{display:inline-block;background:#7C6FF7;color:#fff;padding:14px 28px;border-radius:12px;font-weight:600;font-size:15px;text-decoration:none;margin-top:8px;transition:background .2s}
+.email-btn:hover{background:#6357E8}
+.warning-box{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:12px;padding:16px;margin:12px 0}
+.warning-box p{color:#7F1D1D;font-size:14px;margin:0}
+a{color:#7C6FF7;text-decoration:none}
+a:hover{text-decoration:underline}
+footer{text-align:center;padding:40px 24px;color:#8B87A8;font-size:13px;border-top:1px solid rgba(124,111,247,0.1)}
+footer a{color:#7C6FF7}
+@media(max-width:600px){nav{padding:14px 20px}.container{padding:40px 16px 80px}h1{font-size:28px}.card{padding:20px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Yu<span>tile</span></a>
+  <a href="/" class="nav-back">← Back to home</a>
+</nav>
+
+<div class="container">
+  <div class="hero">
+    <div class="badge">Account Management</div>
+    <h1>Delete Your Account</h1>
+    <p class="subtitle">We're sorry to see you go. You can delete your Yutile account at any time — here's how.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📱</span> Delete from the App</h2>
+    <p>The fastest way to delete your account is directly from the Yutile app:</p>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>Open Yutile</h3>
+        <p>Launch the app on your Android device</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>Go to Profile</h3>
+        <p>Tap your profile icon in the top right corner of the home screen</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>Open Settings</h3>
+        <p>Scroll down and tap "Settings" or the gear icon</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h3>Tap "Delete Account"</h3>
+        <p>Scroll to the bottom of the Settings screen and tap "Delete Account"</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h3>Confirm deletion</h3>
+        <p>You'll be asked to confirm. Once confirmed, your account and data are permanently deleted</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📧</span> Request via Email</h2>
+    <p>If you can't access the app or prefer to request deletion by email, contact us at:</p>
+    <a href="mailto:delete@yutile.com?subject=Account%20Deletion%20Request&body=Please%20delete%20my%20Yutile%20account%20and%20all%20associated%20data.%0A%0AEmail%20address%20associated%20with%20my%20account%3A%20" class="email-btn">📧 Email us to delete your account</a>
+    <p style="margin-top:16px;font-size:14px;color:#8B87A8">Please include the email address associated with your Yutile account. We will process your request within 7 business days and send you a confirmation.</p>
+  </div>
+
+  <div class="card card-warn">
+    <h2><span class="icon">⚠️</span> What Gets Deleted</h2>
+    <div class="warning-box">
+      <p><strong>Account deletion is permanent and cannot be undone.</strong> Once deleted, your data cannot be recovered.</p>
+    </div>
+    <p>When you delete your account, the following is permanently removed:</p>
+    <ul>
+      <li>Your account credentials and profile information</li>
+      <li>All goals, habits, health logs, and personal pillar data</li>
+      <li>Your household links and shared content you created</li>
+      <li>Your trip plans, packing lists, and itineraries</li>
+      <li>All Nova AI conversation history</li>
+      <li>Your waitlist or beta registration</li>
+    </ul>
+    <p><strong>Note:</strong> Content you shared with household members (tasks, events, shopping lists) may remain visible to those members until they delete it from their own accounts.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">💡</span> Before You Go</h2>
+    <p>If you're leaving because of a problem or missing feature, we'd love to hear from you. Your feedback directly shapes Yutile's development.</p>
+    <p><a href="mailto:feedback@yutile.com">Share feedback with our team →</a></p>
+    <p style="margin-top:12px">If you just need a break, you can simply stop using the app — you don't need to delete your account. Your data will be waiting when you return.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📬</span> Questions?</h2>
+    <p>If you have any questions about account deletion or your data, contact our support team:</p>
+    <ul>
+      <li>Email: <a href="mailto:support@yutile.com">support@yutile.com</a></li>
+      <li>Privacy: <a href="mailto:privacy@yutile.com">privacy@yutile.com</a></li>
+    </ul>
+    <p>We aim to respond within 2 business days.</p>
+  </div>
+</div>
+
+<footer>
+  <p><a href="/">Yutile</a> · <a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a> · <a href="/delete-account">Delete Account</a></p>
+  <p style="margin-top:8px">© 2026 Yutile. your life, optimized.</p>
+</footer>
+
+</body>
+</html>
